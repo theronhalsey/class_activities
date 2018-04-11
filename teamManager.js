@@ -3,6 +3,7 @@ var inquirer = require("inquirer");
 var playerCount = 0;
 var players = [];
 var subs = [];
+var games = 0
 
 var Player = function (name, position, offense, defense) {
     this.name = name;
@@ -12,15 +13,19 @@ var Player = function (name, position, offense, defense) {
     this.goodGame = function () {
         if (Math.round(Math.random) = 1 && this.defense < 10) {
             this.defense++
+            console.log(this.name + "'s defense has gone up!")
         } else if (this.offense < 10) {
             this.offense++
+            console.log(this.name + "'s offense has gone up!")
         }
     };
     this.badGame = function () {
         if (Math.round(Math.random) = 1 && this.defense > 1) {
             this.defense--
+            console.log(this.name + "'s defense has gone down!")
         } else if (this.offense > 1) {
             this.offense++
+            console.log(this.name + "'s offense has gone down!")
         }
     };
     this.printStats = function () {
@@ -74,9 +79,35 @@ var getPlayers = function () {
     };
 };
 
-var playGame = function() {
-    var attack = Math.floor(Math.random) * 20
-    var defend = Math.floor(Math.random) * 20
+var playGame = function (player1, player2) {
+    if (games < 5) {
+        var attack = Math.floor(Math.random) * 20
+        var defend = Math.floor(Math.random) * 20
+        var teamScore = 0
+        var teamAttack = player1.offense + player2.offense
+        var teamDefense = player1.defense + player2.defense
+        if (attack > teamDefense && teamScore > 0) {
+            teamScore--
+        };
+        if (teamAttack > defend) {
+            teamScore++
+        };
+        games++
+        playGame()
+    } else {
+        console.log("After " + games + " rounds, the final score is: " +teamScore)
+        if (teamScore > 0) {
+            console.log("Good job! You win!");
+            player1.goodGame();
+            player2.goodGame();
+        } else if (teamScore < 0) {
+            console.log("So sad! You loose!");
+            player1.badGame();
+            player2.badGame();
+        } else {
+            console.log("You tied! Try agin!");
+        }
+    }
 }
 
 getPlayers();
