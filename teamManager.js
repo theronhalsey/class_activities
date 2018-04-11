@@ -3,7 +3,9 @@ var inquirer = require("inquirer");
 var playerCount = 0;
 var players = [];
 var subs = [];
-var games = 0
+var games = 0;
+var player1 = players[0];
+var player2 = players[1];
 
 var Player = function (name, position, offense, defense) {
     this.name = name;
@@ -31,6 +33,37 @@ var Player = function (name, position, offense, defense) {
     this.printStats = function () {
         console.log("Name: " + this.name + "\nPosition: " + this.position + "\nOffense: " + this.offense + "\nDefense: " + this.defense);
     };
+};
+
+var playGame = function (player1, player2) {
+    if (games < 5) {
+        var attack = (Math.floor(Math.random) * 20) + 1
+        var defend = (Math.floor(Math.random) * 20) + 1
+        var teamScore = 0
+        var teamAttack = player1.offense + player2.offense
+        var teamDefense = player1.defense + player2.defense
+        if (attack > teamDefense) {
+            teamScore--
+        };
+        if (teamAttack > defend) {
+            teamScore++
+        };
+        games++
+        playGame()
+    } else {
+        console.log("After " + games + " rounds, the final score is: " + teamScore)
+        if (teamScore > 0) {
+            console.log("Good job! You win!");
+            player1.goodGame();
+            player2.goodGame();
+        } else if (teamScore < 0) {
+            console.log("So sad! You loose!");
+            player1.badGame();
+            player2.badGame();
+        } else {
+            console.log("You tied! Try agin!");
+        }
+    }
 };
 
 var getPlayers = function () {
@@ -76,38 +109,8 @@ var getPlayers = function () {
         });
     } else {
         console.log("You have a full team!")
+        playGame();
     };
 };
-
-var playGame = function (player1, player2) {
-    if (games < 5) {
-        var attack = Math.floor(Math.random) * 20
-        var defend = Math.floor(Math.random) * 20
-        var teamScore = 0
-        var teamAttack = player1.offense + player2.offense
-        var teamDefense = player1.defense + player2.defense
-        if (attack > teamDefense && teamScore > 0) {
-            teamScore--
-        };
-        if (teamAttack > defend) {
-            teamScore++
-        };
-        games++
-        playGame()
-    } else {
-        console.log("After " + games + " rounds, the final score is: " +teamScore)
-        if (teamScore > 0) {
-            console.log("Good job! You win!");
-            player1.goodGame();
-            player2.goodGame();
-        } else if (teamScore < 0) {
-            console.log("So sad! You loose!");
-            player1.badGame();
-            player2.badGame();
-        } else {
-            console.log("You tied! Try agin!");
-        }
-    }
-}
 
 getPlayers();
