@@ -48,13 +48,13 @@ var yearSearch = function () {
 };
 
 var songSearch = function () {
-    getSearchTerms()
+    getSearchTerms();
     connection.query("SELECT * FROM top5000 WHERE song_title = '" + searchTerms.join(" ") + "'", function (err, res) {
         if (err) throw err;
         console.log(res)
         connection.end();
     })
-}
+};
 
 switch (command) {
     case "artistSearch":
