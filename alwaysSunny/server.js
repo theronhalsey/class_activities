@@ -44,8 +44,8 @@ app.get("/cast", function (req, res) {
     });
 });
 
-app.get("/coolness", function (req, res) {
-    connection.query("SELECT * FROM actors", function (err, result) {
+app.get("/coolness-chart", function (req, res) {
+    connection.query("SELECT * FROM actors ORDER BY coolness_points DESC", function (err, result) {
 
         var html = "<h1> Cast </h1>";
 
@@ -54,9 +54,10 @@ app.get("/coolness", function (req, res) {
 
         // We then use the retrieved records from the database to populate our HTML file.
         for (var i = 0; i < result.length; i++) {
-            html += "<li><p> Coolness Points: " + result[i].coolness_points + "</p>";
+            html += "<li><p> ID: " + result[i].id + "</p>";
             html += "<p>Character: " + result[i].name + " </p></li>";
-            html += "<p>ID: " + result[i].id + " </p></li>";
+            html += "<p>Coolness Points: " + result[i].coolness_points + " </p></li>";
+            html += "<p>Attitude: " + result[i].attitude + " </p></li>";
         }
 
         // We close our unordered list.
@@ -67,8 +68,9 @@ app.get("/coolness", function (req, res) {
     });
 });
 
-app.get("/attitude", function (req, res) {
+app.get("/attitude/:attitude", function (req, res) {
     connection.query("SELECT * FROM actors", function (err, result) {
+        var attitude = req.params.attitude
 
         var html = "<h1> Cast </h1>";
 
@@ -77,9 +79,12 @@ app.get("/attitude", function (req, res) {
 
         // We then use the retrieved records from the database to populate our HTML file.
         for (var i = 0; i < result.length; i++) {
-            html += "<li><p>Attitude: " + result[i].attitude + "</p>";
-            html += "<p>Character: " + result[i].name + " </p></li>";
-            html += "<p>ID: " + result[i].id + " </p></li>";
+            if (attitude === result[i].attitude) {
+                html += "<li><p> ID: " + result[i].id + "</p>";
+                html += "<p>Character: " + result[i].name + " </p></li>";
+                html += "<p>Coolness Points: " + result[i].coolness_points + " </p></li>";
+                html += "<p>Attitude: " + result[i].attitude + " </p></li>";
+            }
         }
 
         // We close our unordered list.
