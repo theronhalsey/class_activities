@@ -6,41 +6,54 @@ var PORT = 8080;
 var server = http.createServer(handleRequest)
 
 function handleRequest(req, res) {
-
+    
     var path = req.url;
 
     switch (path) {
 
         case "/":
-            return fs.readFile(__dirname + "/index.html", function (err, data) {
-                res.writeHead(200, { "Content-Type": "text/html" });
-                res.end(data);
-            });
+            return displayIndex(path, req, res);
 
-        case "/Foods":
-            return fs.readFile(__dirname + "/foods.html", function (err, data) {
-                res.writeHead(200, { "Content-Type": "text/html" });
-                res.end(data);
-            });
+        case "/Food":
+            return displayFood(path, req, res);
 
         case "/Movies":
-            return fs.readFile(__dirname + "/movies.html", function (err, data) {
-                res.writeHead(200, { "Content-Type": "text/html" });
-                res.end(data);
-            });
-
+            return displayMovies(path, req, res);
 
         case "/CSS":
-            return fs.readFile(__dirname + "/css.html", function (err, data) {
-                res.writeHead(200, { "Content-Type": "text/html" });
-                res.end(data);
-            });
+            return displayCSS(path, req, res);
 
         default:
             return display404(path, req, res);
     };
 };
 
-server.listen(PORT, function () {
-    console.log("Server listening on: http://localhost:" + PORT);
-});
+
+function displayIndex(req, res) {
+    fs.readFile(__dirname + "/index.html", function (err, data) {
+        res.writeHead(200, { "Content-Type": "text/html" });
+        res.end(data);
+    });
+};
+
+function displayFood(req, res) {
+    fs.readFile(__dirname + "/foods.html", function (err, data) {
+        res.writeHead(200, { "Content-Type": "text/html" });
+        res.end(data);
+    });
+};
+
+function displayMovies(req, res) {
+    fs.readFile(__dirname + "/movies.html", function (err, data) {
+        res.writeHead(200, { "Content-Type": "text/html" });
+        res.end(data);
+    });
+};
+
+function displayCSS(req, res) {
+    fs.readFile(__dirname + "/css.html", function (err, data) {
+        res.writeHead(200, { "Content-Type": "text/html" });
+        res.end(data);
+    });
+};
+
