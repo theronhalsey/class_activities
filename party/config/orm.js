@@ -22,7 +22,7 @@ var orm = {
       console.log(result);
     });
   },
-  findWhoHasMost: function(tableOneCol, tableTwoForeignKey, tableOne, tableTwo) {
+  findThisAndThat: function(tableOneCol, tableTwoForeignKey, tableOne, tableTwo) {
     var queryString =
       "SELECT ??, COUNT(??) AS count FROM ?? LEFT JOIN ?? ON ??.??= ??.id GROUP BY ?? ORDER BY count DESC LIMIT 1";
 
