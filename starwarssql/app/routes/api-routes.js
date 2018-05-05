@@ -4,7 +4,7 @@
 
 // Dependencies
 // =============================================================
-var Characters = require("../config/Characters.js");
+var Characters = require("../config/characters.js");
 
 
 // Routes
