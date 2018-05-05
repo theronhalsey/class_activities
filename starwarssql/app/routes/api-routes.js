@@ -4,31 +4,31 @@
 
 // Dependencies
 // =============================================================
-var characters = require("../config/characters.js");
+var Characters = require("../config/Characters.js");
 
 
 // Routes
 // =============================================================
 module.exports = function(app) {
 
-  // Search for Specific Character (or all characters) then provides JSON
-  app.get("/api/:characters?", function(req, res) {
+  // Search for Specific Character (or all Characters) then provides JSON
+  app.get("/api/:Characters?", function(req, res) {
 
     // If the user provides a specific character in the URL...
-    if (req.params.characters) {
+    if (req.params.Characters) {
 
       // Then display the JSON for ONLY that character.
-      // (Note how we're using the characters here to run our searches)
-      characters.searchCharacter(req.params.characters, function(data) {
+      // (Note how we're using the Characters here to run our searches)
+      Characters.searchCharacter(req.params.Characters, function(data) {
         res.json(data);
       });
     }
 
     // Otherwise...
     else {
-      // Otherwise display the data for all of the characters.
-      // (Note how we're using the characters here to run our searches)
-      characters.allCharacters(function(data) {
+      // Otherwise display the data for all of the Characters.
+      // (Note how we're using the Characters here to run our searches)
+      Characters.allCharacters(function(data) {
         res.json(data);
       });
     }
@@ -41,8 +41,8 @@ module.exports = function(app) {
     // Take the request...
     var character = req.body;
 
-    // Then send it to the characters to "save" into the DB.
-    characters.addCharacter(character, function(data) {
+    // Then send it to the Characters to "save" into the DB.
+    Characters.addCharacter(character, function(data) {
       console.log(data);
     });
 
