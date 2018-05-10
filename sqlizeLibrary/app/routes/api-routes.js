@@ -20,31 +20,37 @@ module.exports = function (app) {
 
   // Add sequelize code to get a specific book and return it as JSON
   app.get("/api/:book", function (req, res) {
-    Book.findOne({ where: {title: req.params}}).then(function (results) {
+    Book.findAll({ where: { title: req.params.book } }).then(function (results) {
       res.json(results)
     });
   });
 
   // Add sequelize code to get all books of a specific genre and return them as JSON
   app.get("/api/genre/:genre", function (req, res) {
-    Book.findOne({ where: {genre: req.params}}).then(function (results) {
+    Book.findAll({ where: { genre: req.params.genre } }).then(function (results) {
       res.json(results)
     });
   });
 
   // Add sequelize code to get all books from a specific author and return them as JSON
   app.get("/api/author/:author", function (req, res) {
-
+    Book.findAll({ where: { author: req.params.author } }).then(function (results) {
+      res.json(results)
+    });
   });
 
   // Add sequelize code to get all "long" books (more than 150 pages) and return them as JSON
   app.get("/api/books/long", function (req, res) {
-
+    Book.findAll({ where: { pages: { $gte: 150 }} }).then(function (results) {
+      res.json(results)
+    });
   });
 
   // Add sequelize code to get all "short" books (150 pages or less) and return them as JSON
   app.get("/api/books/short", function (req, res) {
-
+    Book.findAll({ where: { pages: { $lte: 150 }} }).then(function (results) {
+      res.json(results)
+    });
   });
 
   // Add sequelize code to create a book
