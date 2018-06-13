@@ -1,7 +1,6 @@
 import React from "react";
-import HelloBootstrap from "./components/HelloBootstrap";
+import JSXVariables from "./components/JSXVariables";
 
-const App = () => <HelloBootstrap />;
-
+const App = () => <JSXVariables />;
 
 export default App;
