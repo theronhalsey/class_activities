@@ -1,15 +1,39 @@
 import React from "react";
-import Header from "./components/Header";
-import Section from "./components/Section";
+import List from "./components/List";
 
-import Navbar from "./components/Navbar";
+const groceries = [
+  {
+    id: 1,
+    name: "Milk",
+    purchased: true
+  },
+  {
+    id: 2,
+    name: "Eggs",
+    purchased: true
+  },
+  {
+    id: 3,
+    name: "Cheese",
+    purchased: false
+  },
+  {
+    id: 4,
+    name: "Cake Mix",
+    purchased: false
+  },
+  {
+    id: 5,
+    name: "Carrots",
+    purchased: false
+  },
+  {
+    id: 6,
+    name: "Juice",
+    purchased: true
+  }
+];
 
-const App = () => (
-  <div>
-    <Navbar />
-    <Header />
-    <Section />
-  </div>
-);
+const App = () => <List groceries={groceries} />;
 
 export default App;
