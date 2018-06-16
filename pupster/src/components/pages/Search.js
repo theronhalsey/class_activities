@@ -1,10 +1,9 @@
 import React from "react";
 import { Link, Route } from "react-router-dom";
-import Learn from "./Learn";
 
-const Contact = props => (
+const Search = props => (
   <div>
-    <h1>Contact Page</h1>
+    <h1>Search Page</h1>
     <p>
       Integer cursus bibendum sem non pretium. Vestibulum in aliquet sem, quis
       molestie urna. Aliquam semper ultrices varius. Aliquam faucibus sit amet
@@ -18,14 +17,7 @@ const Contact = props => (
       nostra, per inceptos himenaeos. Etiam ornare rutrum felis at rhoncus.
       Etiam vel condimentum magna, quis tempor nulla.
     </p>
-    <Link to={`${props.match.url}/learn`} role="button" className="btn btn-link">
-      Learn More
-    </Link>{" "}
-    <Link to="/contact" role="button" className="btn btn-link">
-      Learn Less
-    </Link>
-    <Route exact path={`${props.match.url}/learn`} component={Learn} />
   </div>
 );
 
-export default Contact;
+export default Search;
